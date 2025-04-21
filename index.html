@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>JavaScript Tasks</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      background-color: pink;
+    }
+    .section {
+      background-color: #7AC6D2;
+      padding: 20px;
+      margin-bottom: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    .output, .date-time {
+      margin-top: 15px;
+      padding: 10px;
+      background-color: #eef;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+    }
+    .font-box {
+      margin-top: 20px;
+    }
+    #fontText {
+      padding: 10px;
+      border: 1px solid #999;
+      display: inline-block;
+      border-radius: 5px;
+    }
+    label {
+      display: block;
+      margin-bottom: 10px;
+    }
+    input {
+      padding: 5px;
+      width: 200px;
+    }
+    button {
+      margin-top: 10px;
+      padding: 8px 12px;
+      background-color: #6c5ce7;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #5a4bcf;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 1. Basic Info Form -->
+  <div class="section">
+    <h2>1. Basic Information Form</h2>
+    <form id="infoForm">
+      <label>Name: <input type="text" id="name"></label>
+      <label>Age: <input type="number" id="age"></label>
+      <label>Email: <input type="email" id="email"></label>
+      <button type="button" onclick="displayFormData()">Submit</button>
+    </form>
+    <div class="output" id="formOutput"></div>
+  </div>
+
+  <!-- 2. Change Image -->
+  <div class="section">
+    <h2>2. Change Image on Button Click</h2>
+    <img id="myImage" src="https://via.placeholder.com/150" alt="Placeholder" width="150">
+    <div>
+      <button onclick="changeImage()">Change Image</button>
+    </div>
+  </div>
+
+  <!-- 3. Font Size Changer -->
+  <div class="section">
+    <h2>3. Font Size Changer</h2>
+    <div class="font-box">
+      <div id="fontText">This text will change size</div>
+      <div style="margin-top: 10px;">
+        <button onclick="changeFontSize(1)">Increase Font</button>
+        <button onclick="changeFontSize(-1)">Decrease Font</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4. Current Date & Time -->
+  <div class="section">
+    <h2>4. Current Date & Time</h2>
+    <div class="date-time" id="dateTimeBox"></div>
+  </div>
+
+  <script>
+    // 1. Show form data
+    function displayFormData() {
+      const name = document.getElementById("name").value;
+      const age = document.getElementById("age").value;
+      const email = document.getElementById("email").value;
+
+      const output = `
+        <strong>Name:</strong> ${name} <br>
+        <strong>Age:</strong> ${age} <br>
+        <strong>Email:</strong> ${email}
+      `;
+
+      document.getElementById("formOutput").innerHTML = output;
+    }
+
+    // 2. Change image
+    function changeImage() {
+      const img = document.getElementById("myImage");
+      img.src = "https://picsum.photos/150?random=" + Math.floor(Math.random() * 1000);
+    }
+
+    // 3. Font size changer
+    let currentFontSize = 16;
+    function changeFontSize(delta) {
+      currentFontSize += delta;
+      if (currentFontSize < 10) currentFontSize = 10;
+      document.getElementById("fontText").style.fontSize = currentFontSize + "px";
+    }
+
+    // 4. Show date & time
+    function updateDateTime() {
+      const now = new Date();
+      const dateTimeString = now.toLocaleString();
+      document.getElementById("dateTimeBox").textContent = "Current Date & Time: " + dateTimeString;
+    }
+
+    setInterval(updateDateTime, 1000);
+    updateDateTime();
+  </script>
+
+</body>
+</html>
